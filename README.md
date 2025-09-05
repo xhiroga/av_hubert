@@ -75,7 +75,13 @@ pip install --editable ./
 $ cd avhubert
 $ python
 >>> import fairseq
->>> import hubert_pretraining, hubert
+>>> import hubert_asr # has av_hubert_seq2seq
+
+# From PyTorch 2.6, the default value of the `weights_only` argument in `torch.load` was changed from `False` to `True`.
+>>> from torch.serialization import add_safe_globals
+>>> import sentencepiece
+>>> add_safe_globals([fairseq.data.dictionary.Dictionary, fairseq.data.encoders.sentencepiece_bpe.SentencepieceBPE, sentencepiece.SentencePieceProcessor])
+
 >>> ckpt_path = "/path/to/the/checkpoint.pt"
 >>> models, cfg, task = fairseq.checkpoint_utils.load_model_ensemble_and_task([ckpt_path])
 >>> model = models[0]

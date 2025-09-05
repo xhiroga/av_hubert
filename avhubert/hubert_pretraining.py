@@ -140,6 +140,7 @@ class AVHubertPretrainingConfig(FairseqDataclass):
         default=False,
         metadata={"help": "skip verifying label-audio alignment"},
     )
+    input_modality: str = field(default="image", metadata={"help": "input modality"})
     image_aug: bool = field(default=False, metadata={'help': 'image data augmentation'})
     image_crop_size: int = field(
         default=88, metadata={"help": "image ROI size"})
